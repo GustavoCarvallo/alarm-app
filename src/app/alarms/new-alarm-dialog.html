@@ -16,7 +16,7 @@
   <p>¿Está seguro que desea eliminar la alarma?</p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button (click)="onCancel()" data-cy="modal-cancel-btn">Cancelar</button>
   <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="!date.valid" data-cy="modal-accept-btn">Aceptar</button>
 </div>
 </div>

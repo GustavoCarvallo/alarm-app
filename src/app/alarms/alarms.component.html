@@ -58,7 +58,7 @@
       <ng-container matColumnDef="delete" data-cy="delete-column">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
           <td mat-cell *matCellDef="let row">
-              <button mat-icon-button aria-label="Delete icon" (click)="openAlarmModal('delete', row)">
+              <button mat-icon-button aria-label="Delete icon" (click)="openAlarmModal('delete', row)" data-cy="delete-alarm">
                   <mat-icon>delete</mat-icon>
               </button>
           </td>

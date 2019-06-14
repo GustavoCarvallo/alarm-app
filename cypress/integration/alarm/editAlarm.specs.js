@@ -1,5 +1,5 @@
-const nextDateAlarm ='2019-06-14T13:00';
-const nextDateAlarm2 ='2019-06-15T13:00';
+const nextDateAlarm ='2019-06-15T13:00';
+const nextDateAlarm2 ='2019-06-16T13:00';
 const pastDateAlarm ='2019-06-13T15:00';
 
 describe("Edit alarm functionality", () => {
@@ -71,8 +71,33 @@ describe("Edit alarm functionality", () => {
     cy.get('[data-cy=modal-cancel-btn').click();
   });
 
+  it('If a past date is enter it should disabled the accept button ', () => {
+
+    //Open the edit modal
+    cy.get('[data-cy=edit-alarm]').click();
+
+    //Select the input and delete the current date
+    cy.get('[data-cy="modal-date-input"]').then(input => {
+      cy.wait(1000);
+      input[0].dispatchEvent(new Event('input', { bubbles: true }));
+      input.val(pastDateAlarm)
+    });
+    cy.get('[data-cy="modal-date-input"]').trigger('change');
+    cy.wait(1000);
+
+    //Check the accept button
+    cy.get('[data-cy="modal-accept-btn"]').should('be.disabled');
+    cy.wait(1000);
+
+    //Close the modal
+    cy.get('[data-cy=modal-cancel-btn').click();
+  });
 
   it('If the alarm is edited, it should be reflect on the alarm`s list ', () => {
+
+    //Close the modal
+    cy.get('[data-cy=modal-cancel-btn').click();
+    cy.wait(1000);
 
     //Open the edit modal
     cy.get('[data-cy=edit-alarm]').click();
@@ -91,7 +116,7 @@ describe("Edit alarm functionality", () => {
     cy.wait(2000);
 
     //Checks if the alarm was edited on the list.
-    cy.get('.mat-row .ng-star-inserted').contains('15/06/2019 - 1:00 PM');
+    cy.get('.mat-row .ng-star-inserted').contains('16/06/2019 - 1:00 PM');
   });
 
 });

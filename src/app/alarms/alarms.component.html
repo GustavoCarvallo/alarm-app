@@ -1,0 +1,74 @@
+<div>
+  <div class="add-btn-container">
+    <button mat-fab color="primary" (click)="openAlarmModal('new')" data-cy="add-new-alarm-btn">
+        <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <mat-form-field class="search-input">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar..." data-cy="search-input">
+  </mat-form-field>
+
+  <mat-card *ngIf="isLoading" 
+   style="display: flex; justify-content: center; align-items: center">
+  <mat-progress-spinner 
+    color="primary" 
+    mode="indeterminate">
+  </mat-progress-spinner>
+</mat-card>
+
+  <div *ngIf="!isLoading" class="mat-elevation-z8">
+
+    <table mat-table [dataSource]="dataSource" matSort data-cy="alarm-list">
+      <!-- ID Column -->
+      <ng-container matColumnDef="id" data-cy="id-column">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-container>
+
+      <!-- Ringing Column -->
+      <ng-container matColumnDef="ringing" data-cy="ringing-column">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Sonando </th>
+        <td mat-cell *matCellDef="let row"> {{row.ringing ? 'Si' : 'No'}} </td>
+      </ng-container>
+
+      <!-- Active Column -->
+      <ng-container matColumnDef="active" data-cy="active-column">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Activa </th>
+        <td mat-cell *matCellDef="let row"> {{row.active ? 'Si' : 'No'}} </td>
+      </ng-container>
+
+      <!-- Date Column -->
+      <ng-container matColumnDef="date" data-cy="date-column">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha y Hora </th>
+        <td mat-cell *matCellDef="let row"> {{row.date | date: 'dd'}}/{{row.date | date:'MM'}}/{{row.date | date: 'yyyy'}} - {{row.date | date: 'shortTime'}}</td>
+      </ng-container>
+
+      <!-- Edit Column -->
+      <ng-container matColumnDef="edit" data-cy="edit-column">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Editar </th>
+        <td mat-cell *matCellDef="let row">
+            <button mat-icon-button aria-label="Edit icon" (click)="openAlarmModal('edit', row)">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </td>
+      </ng-container>
+
+      <!-- Delete Column -->
+      <ng-container matColumnDef="delete" data-cy="delete-column">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
+          <td mat-cell *matCellDef="let row">
+              <button mat-icon-button aria-label="Delete icon" (click)="openAlarmModal('delete', row)">
+                  <mat-icon>delete</mat-icon>
+              </button>
+          </td>
+        </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>

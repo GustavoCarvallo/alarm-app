@@ -1,0 +1,22 @@
+<div data-cy="modal">
+<h1 mat-dialog-title data-cy="modal-title">
+  <span *ngIf="data.type === 'new'">Crear nueva </span> 
+  <span *ngIf="data.type === 'edit'">Modificar </span> 
+  <span *ngIf="data.type === 'delete'">Eliminar </span> 
+  alarma
+</h1>
+<div mat-dialog-content *ngIf="data.type !== 'delete'">
+  <mat-checkbox [(ngModel)]="data.alarm.active" data-cy="modal-active-checkbox">Activa</mat-checkbox>
+  <mat-form-field style="margin-top: 30px; width: 100%;">
+    <input matInput type="datetime-local" placeholder="Fecha y Hora" [formControl]="date" required (change)="updateDate($event)" data-cy="modal-date-input">
+    <mat-error *ngIf="date.invalid">Seleccione fecha y hora</mat-error>
+  </mat-form-field>
+</div>
+<div mat-dialog-content *ngIf="data.type === 'delete'">
+  <p>¿Está seguro que desea eliminar la alarma?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="!date.valid" data-cy="modal-accept-btn">Aceptar</button>
+</div>
+</div>

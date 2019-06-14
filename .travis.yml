@@ -18,4 +18,3 @@ cache:
 script:
   - ng build --prod
   - npm run cy:verify
-  - npm run ci:cy-run

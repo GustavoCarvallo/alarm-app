@@ -1,4 +1,4 @@
-const nextDateAlarm ='2019-06-14T13:00';
+const nextDateAlarm ='2019-06-15T13:00';
 
 describe("Delete alarm functionality", () => {
   before(() => {

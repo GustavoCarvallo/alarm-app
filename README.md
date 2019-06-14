@@ -6,7 +6,13 @@ Install all dependencies with npm.
 ```bash
 npm install
 ```
-Run the angular app
+
+Install (if needed) angular cli.
+```bash
+npm install -g @angular/cli
+```
+
+Run the angular app.
 ```bash
 ng serve
 ```

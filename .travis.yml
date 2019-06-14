@@ -1,14 +1,20 @@
 language: node_js
 node_js:
-  - "12"
-dist: trusty
-sudo: required
-branches:
-  only:
-    - master
-before_script:
-  - npm install
-  - npm install -g @angular/cli
+  - "lts/*"
+install:
+  - npm ci
+cache:
+  directories:
+    - ~/.npm
+    - ./node_modules
+    - ~/.cache
+  override:
+    - npm ci
+    - npm run cy:verify
+
+
 script:
   - ng lint
   - ng build --prod
+  - npm run cy:verify
+  - npm run ci:cy-run

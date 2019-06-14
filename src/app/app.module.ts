@@ -12,12 +12,13 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import AlarmsComponent, { AlarmDialog } from './alarms/alarms.component';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatCardModule} from '@angular/material/card';
+import {AlarmDialog} from "./alarms/new-alarm-dialog.component";
+import {AlarmsComponent} from "./alarms/alarms.component";
 
 @NgModule({
   declarations: [

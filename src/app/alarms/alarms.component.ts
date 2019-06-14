@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Alarm } from './alarm.model';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {FormControl, Validators} from '@angular/forms';
-import { delay } from 'q';
+import {MatDialog} from '@angular/material/dialog';
+import {AlarmDialog} from "./new-alarm-dialog.component";
 
 /**
  * @title Data table with sorting, pagination, and filtering.
@@ -16,7 +15,7 @@ import { delay } from 'q';
   templateUrl: './alarms.component.html',
   styleUrls: ['./alarms.component.less']
 })
-export default class AlarmsComponent implements OnInit {
+export class AlarmsComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'ringing', 'active', 'date', 'edit', 'delete'];
   dataSource: MatTableDataSource<Alarm>;
@@ -88,31 +87,4 @@ export default class AlarmsComponent implements OnInit {
   getRandomInt(min: number, max: number){
     return Math.floor(Math.random() * (max - min)) + min;
   }
-}
-
-@Component({
-  selector: 'new-alarm-dialog',
-  templateUrl: 'new-alarm-dialog.html',
-})
-export class AlarmDialog {
-
-  date: FormControl;
-
-  constructor(public dialogRef: MatDialogRef<AlarmDialog>, @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.date = new FormControl('', [Validators.required]);
-    if(this.data.alarm.date != undefined){
-      this.date.setValue(this.data.alarm.date);
-    }
-  }
-
-  onCancel(): void {
-    this.dialogRef.close();
-  }
-
-  updateDate(event): void {
-    const value = event.currentTarget.value;
-    this.date.setValue(value);
-    this.data.alarm.date = value;
-  }
-
 }

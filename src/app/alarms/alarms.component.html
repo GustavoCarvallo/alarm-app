@@ -48,7 +48,7 @@
       <ng-container matColumnDef="edit" data-cy="edit-column">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Editar </th>
         <td mat-cell *matCellDef="let row">
-            <button mat-icon-button aria-label="Edit icon" (click)="openAlarmModal('edit', row)">
+            <button mat-icon-button aria-label="Edit icon" (click)="openAlarmModal('edit', row)" data-cy="edit-alarm">
                 <mat-icon>edit</mat-icon>
             </button>
         </td>
